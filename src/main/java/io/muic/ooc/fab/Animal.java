@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class Animal {
+
     // Whether the animal is alive or not.
     private boolean alive;
 
-    // The fox's position.
+    // The animal's position.
     protected Location location;
     // The field occupied.
     protected Field field;
     // Individual characteristics (instance fields).
-    // The fox's age.
+    // The animal's age.
     protected int age;
 
     private static final Random RANDOM = new Random();
@@ -113,7 +114,7 @@ public abstract class Animal {
      *
      * @param newRabbits A list to return newly born rabbits.
      */
-    protected void giveBirth(List newRabbits) {
+    protected void giveBirth(List<Animal> newRabbits) {
         // New rabbits are born into adjacent locations.
         // Get a list of adjacent free locations.
         List<Location> free = field.getFreeAdjacentLocations(location);
@@ -124,6 +125,8 @@ public abstract class Animal {
             newRabbits.add(young);
         }
     }
+
+    public abstract void act(List<Animal> animals);
 
 
 }
