@@ -5,6 +5,8 @@ import java.util.Random;
 
 public abstract class Animal {
 
+    protected static final Random RANDOM = new Random();
+
     // Whether the animal is alive or not.
     private boolean alive;
 
@@ -14,10 +16,19 @@ public abstract class Animal {
     protected Field field;
     // Individual characteristics (instance fields).
     // The animal's age.
-    protected int age;
+    protected int age = 0;
 
-    private static final Random RANDOM = new Random();
 
+
+
+    public Animal(boolean randomAge, Field field, Location location) {
+        this.field = field;
+        setLocation(location);
+        setAlive(true);
+        if(randomAge) {
+            age = RANDOM.nextInt(getMaxAge());
+        }
+    }
 
     /**
      * Check whether the animal is alive or not.
@@ -112,21 +123,20 @@ public abstract class Animal {
      * Check whether or not this rabbit is to give birth at this step. New
      * births will be made into free adjacent locations.
      *
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newAnimals A list to return newly born rabbits.
      */
-    protected void giveBirth(List<Animal> newRabbits) {
-        // New rabbits are born into adjacent locations.
+    protected void giveBirth(List<Animal> newAnimals) {
+        // New animals are born into adjacent locations.
         // Get a list of adjacent free locations.
         List<Location> free = field.getFreeAdjacentLocations(location);
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Animal young = createYoung(false, field, loc);
-            newRabbits.add(young);
+            newAnimals.add(young);
         }
     }
 
     public abstract void act(List<Animal> animals);
-
 
 }
