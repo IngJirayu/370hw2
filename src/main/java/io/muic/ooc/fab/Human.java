@@ -3,7 +3,7 @@ package io.muic.ooc.fab;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Animal{
+public abstract class Human {
 
     protected static final Random RANDOM = new Random();
 
@@ -138,6 +138,6 @@ public abstract class Animal{
         }
     }
 
-    public abstract void act(List<Animal> animals);
+    public abstract void act(List<Human> animals);
 
 }

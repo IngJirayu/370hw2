@@ -95,9 +95,9 @@ public class Simulator {
         List<Animal> newAnimals = new ArrayList<>();
         // Let all animals act.
         for (Iterator<Animal> it = animals.iterator(); it.hasNext();) {
-            Animal animal = it.next();
-            animal.act(newAnimals);
-            if (!animal.isAlive()) {
+            Animal livingThing = it.next();
+            livingThing.act(newAnimals);
+            if (!livingThing.isAlive()) {
                 it.remove();
             }
         }

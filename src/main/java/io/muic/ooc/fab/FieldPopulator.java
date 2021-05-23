@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class FieldPopulator {
+public class FieldPopulator{
     protected static final Random RANDOM = new Random();
 
     private Map<AnimalType, Double> probabilityMap = new HashMap<AnimalType, Double>() {{
@@ -29,6 +29,7 @@ public class FieldPopulator {
                         Animal animal = AnimalFactory.createAnimal(entry.getKey(), field, location);
                         animals.add(animal);
                         break;
+
                     }
                 }
 
