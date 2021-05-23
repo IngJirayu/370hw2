@@ -21,7 +21,7 @@ public abstract class Animal {
 
 
 
-    public Animal(boolean randomAge, Field field, Location location) {
+    public void initialize(boolean randomAge, Field field, Location location) {
         this.field = field;
         setLocation(location);
         setAlive(true);
@@ -117,7 +117,9 @@ public abstract class Animal {
 
     protected abstract int getBreedingAge();
 
-    protected abstract Animal createYoung(boolean randomAge, Field field, Location location);
+    private Animal createYoung(boolean randomAge, Field field, Location location){
+        return AnimalFactory.createAnimal(this.getClass(), field, location);
+    }
 
     /**
      * Check whether or not this rabbit is to give birth at this step. New

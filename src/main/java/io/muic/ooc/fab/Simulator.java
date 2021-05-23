@@ -2,12 +2,9 @@ package io.muic.ooc.fab;
 
 
 import io.muic.ooc.fab.view.SimulatorView;
-
-import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Color;
 
 public class Simulator {
 
@@ -29,8 +26,7 @@ public class Simulator {
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    // Random generator
-    private static final Random RANDOM = new Random();
+
 
     /**
      * Construct a simulation field with default size.
@@ -58,8 +54,10 @@ public class Simulator {
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
+        AnimalType[] animalTypes = AnimalType.values();
+        for (int i = 0; i < animalTypes.length; i++) {
+            view.setColor(animalTypes[i].getAnimalClass(), animalTypes[i].getColor());
+        }
 
         // Setup a valid starting point.
         reset();
@@ -114,32 +112,10 @@ public class Simulator {
     public void reset() {
         step = 0;
         animals.clear();
-        populate();
+        new FieldPopulator().populate(field, animals);
 
         // Show the starting state in the view.
         view.showStatus(step, field);
-    }
-
-    /**
-     * Randomly populate the field with foxes and rabbits.
-     */
-    private void populate() {
-
-        field.clear();
-        for (int row = 0; row < field.getDepth(); row++) {
-            for (int col = 0; col < field.getWidth(); col++) {
-                if (RANDOM.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Animal animal = AnimalFactory.createAnimal(AnimalType.FOX, field, location);
-                    animals.add(animal);
-                } else if (RANDOM.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Animal animal = AnimalFactory.createAnimal(AnimalType.RABBIT, field, location);
-                    animals.add(animal);
-                }
-                // else leave the location empty.
-            }
-        }
     }
 
     /**
