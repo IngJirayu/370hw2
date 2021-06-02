@@ -22,6 +22,22 @@ public class Hunter extends Animal{
                     rabbit.setDead();
                     return where;
                 }
+
+            }
+            else if (animal instanceof Fox){
+                Fox fox = (Fox) animal;
+                if (fox.isAlive()) {
+                    fox.setDead();
+                    return where;
+                }
+            }
+
+            else if (animal instanceof Tiger){
+                Tiger tiger = (Tiger) animal;
+                if (tiger.isAlive()) {
+                    tiger.setDead();
+                    return where;
+                }
             }
         }
         return null;

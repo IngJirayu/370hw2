@@ -8,7 +8,7 @@ public class Tiger extends Animal {
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
-    private static final int FOX_FOOD_VALUE = 13;
+    private static final int FOX_FOOD_VALUE = 18;
 
 
     // The fox's food level, which is increased by eating rabbits.
