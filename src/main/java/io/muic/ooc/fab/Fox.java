@@ -2,7 +2,6 @@ package io.muic.ooc.fab;
 
 import java.util.List;
 import java.util.Iterator;
-import java.util.Random;
 
 public class Fox extends Animal {
 

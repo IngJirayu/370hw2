@@ -8,6 +8,7 @@ public class Tiger extends Animal {
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
+    private static final int FOX_FOOD_VALUE = 13;
 
 
     // The fox's food level, which is increased by eating rabbits.
@@ -24,7 +25,7 @@ public class Tiger extends Animal {
     @Override
     public void initialize(boolean randomAge, Field field, Location location) {
         super.initialize(randomAge, field, location);
-        foodLevel = RANDOM.nextInt(RABBIT_FOOD_VALUE);
+        foodLevel = RANDOM.nextInt(FOX_FOOD_VALUE);
     }
 
     /**
@@ -84,19 +85,25 @@ public class Tiger extends Animal {
                     foodLevel = RABBIT_FOOD_VALUE;
                     return where;
                 }
+
+            } else if (animal instanceof Fox){
+                Fox fox = (Fox) animal;
+                if (fox.isAlive()){
+                    fox.setDead();
+                    foodLevel = FOX_FOOD_VALUE;
+                    return where;
+                }
             }
         }
         return null;
     }
 
     @Override
-    public int getMaxAge() {
-        return 200;
-    }
+    public int getMaxAge() { return 150; }
 
     @Override
     protected double getBreedingProbability() {
-        return 0.08;
+        return 0.02;
     }
 
     @Override
