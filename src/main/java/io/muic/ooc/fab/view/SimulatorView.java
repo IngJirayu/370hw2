@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 
 public class SimulatorView extends JFrame {
 
+    // A statistics object computing and storing simulation information
+    private FieldStats stats;
+
     // Colors used for empty locations.
     private static final Color EMPTY_COLOR = Color.white;
 
@@ -33,8 +36,7 @@ public class SimulatorView extends JFrame {
 
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
-    // A statistics object computing and storing simulation information
-    private FieldStats stats;
+
 
     /**
      * Create a view of the given width and height.
@@ -137,7 +139,8 @@ public class SimulatorView extends JFrame {
             for (int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
                 if (animal != null) {
-                    stats.incrementCount(animal.getClass());
+                    stats = new Counter(stats).update(animal);
+                    //stats.incrementCount(animal.getClass());
                     fieldView.drawMark(col, row, getColor(animal.getClass()));
                 } else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
